@@ -13,11 +13,21 @@ describe('orientation', function() {
     });
   });
   function triggerWindowEvent(eventName) {
-    angular.forEach(eventListeners[eventName], function(listener) {
+    forEach(eventListeners[eventName], function(listener) {
       listener();
     });
   }
 
+  it('should use $window.orientation if non-null', inject(function($orientation) {
+    $window.orientation = 0;
+    expect($orientation()).toBe('vertical');
+    $window.orientation = 180;
+    expect($orientation()).toBe('vertical');
+    $window.orientation = 181;
+    expect($orientation()).toBe('horizontal');
+    $window.orientation = 'anything';
+    expect($orientation()).toBe('horizontal');
+  }));
   it('should return "horizontal" if width is bigger than height', inject(function($orientation) {
     $window.innerHeight = 400;
     $window.innerWidth = 500;

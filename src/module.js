@@ -16,4 +16,5 @@ var jqmModule = angular.module("jqm", ["ngTouch", "ngRoute", "ngAnimate", "ajosl
   isObject = angular.isObject,
   isString = angular.isString,
   jqLite = angular.element,
-  noop = angular.noop;
+  noop = angular.noop,
+  isFunction = angular.isFunction;

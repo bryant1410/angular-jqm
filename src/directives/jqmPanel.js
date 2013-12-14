@@ -13,7 +13,6 @@
  * @require jqmPanelContainer.
  */
 jqmModule.directive('jqmPanel', function() {
-  var isDef = angular.isDefined;
   return {
     restrict: 'A',
     require: '^jqmPanelContainer',
@@ -21,14 +20,14 @@ jqmModule.directive('jqmPanel', function() {
     transclude: true,
     template: '<%= inlineTemplate("templates/jqmPanel.html") %>',
     // marker controller.
-    controller: angular.noop,
+    controller: noop,
     scope: {
       display: '@',
       position: '@'
     },
     compile: function(element, attr) {
-      attr.display = isDef(attr.display) ? attr.display : 'reveal';
-      attr.position = isDef(attr.position) ? attr.position : 'left';
+      attr.display = isDefined(attr.display) ? attr.display : 'reveal';
+      attr.position = isDefined(attr.position) ? attr.position : 'left';
 
       return function(scope, element, attr, jqmPanelContainerCtrl) {
         if (scope.position !== 'left' && scope.position !== 'right') {

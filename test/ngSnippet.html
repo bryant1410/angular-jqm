@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
     <link type="text/css" rel="stylesheet" href="../bower_components/jquery-mobile-min/jquery.mobile.min.css">
+    <link type="text/css" rel="stylesheet" href="../dist/angular-jqm.css">
 
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-touch/angular-touch.js"></script>
@@ -76,13 +77,18 @@
           Test Dialog
         </div>
 
-<div jqm-button ng-click="SHOWME=!SHOWME">ng-show test</div>
+        <div jqm-button ng-click="SHOWME=!SHOWME">ng-show test</div>
         <div ng-show="SHOWME" class="slide" style="width: 200px; height: 50px; background: red;">Hello!</div>
 
         <div jqm-controlgroup type="horizontal">
           <div jqm-button ng-repeat="d in ['push','reveal','overlay']" ng-click="$root.display=d">
             {{$root.display==d ? '**'+d+'**' : d}}
           </div> 
+        </div>
+
+        ival: {{$root.ival}}
+        <div jqm-input-wrapper>
+          <input type="search" ng-model="$root.ival" clear-btn="ture">
         </div>
 
         <p>hello</p>
@@ -119,6 +125,10 @@
         <a ng-click="go('main.html')">To page1</a>
 
         <p>hello</p>
+        <div jqm-fieldcontain>
+          <label class="ui-input-text" for="myinput">Label</label>
+          <input type="text" id="myinput">
+        </div>
 
         <p>hello</p>
 

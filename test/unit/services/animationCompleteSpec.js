@@ -13,19 +13,18 @@ describe('animationComplete', function() {
             spy = jasmine.createSpy();
         $sniffer.animations = true;
         $sniffer.vendorPrefix = '';
-        spyOn(el, 'bind');
+        spyOn(el, 'on');
         $animationComplete(el, spy);
-        expect(el.bind).toHaveBeenCalledWith('animationend', spy);
+        expect(el.on).toHaveBeenCalledWith('animationend', spy);
     }));
     it('binds to prefixed animationend if vendorPrefix exists', inject(function($animationComplete, $sniffer) {
         var el = angular.element('<div></div>'),
             spy = jasmine.createSpy();
         $sniffer.animations = true;
         $sniffer.vendorPrefix = 'Webkit';
-        spyOn(el, 'bind');
+        spyOn(el, 'on');
         $animationComplete(el, spy);
-        expect(el.bind).toHaveBeenCalledWith('animationend', spy);
-        expect(el.bind).toHaveBeenCalledWith('webkitAnimationEnd', spy);
+        expect(el.on).toHaveBeenCalledWith('animationend webkitAnimationEnd', spy);
     }));
     it('should support once binding', inject(function($animationComplete, $sniffer) {
         var el = angular.element('<div></div>');
@@ -34,13 +33,13 @@ describe('animationComplete', function() {
         $sniffer.animations = true;
         $sniffer.vendorPrefix = '';
 
-        spyOn(el, 'unbind').andCallThrough();
-        spyOn(el, 'bind').andCallThrough();
+        spyOn(el, 'off').andCallThrough();
+        spyOn(el, 'on').andCallThrough();
 
         $animationComplete(el, spy, true);
-        expect(el.bind.mostRecentCall.args[0]).toBe('animationend');
+        expect(el.on.mostRecentCall.args[0]).toMatch('animationend');
         el.triggerHandler('animationend');
-        expect(el.unbind.mostRecentCall.args[0]).toBe('animationend');
+        expect(el.off.mostRecentCall.args[0]).toMatch('animationend');
         expect(spy).toHaveBeenCalled();
 
         spy.reset();
@@ -54,13 +53,12 @@ describe('animationComplete', function() {
         $sniffer.animations = true;
         $sniffer.vendorPrefix = 'Webkit';
 
-        spyOn(el, 'unbind').andCallThrough();
-        spyOn(el, 'bind').andCallThrough();
+        spyOn(el, 'off').andCallThrough();
+        spyOn(el, 'on').andCallThrough();
 
         var removeCb = $animationComplete(el, spy);
-        expect(el.unbind).not.toHaveBeenCalled();
+        expect(el.off).not.toHaveBeenCalled();
         removeCb();
-        expect(el.unbind).toHaveBeenCalledWith('animationend', spy);
-        expect(el.unbind).toHaveBeenCalledWith('webkitAnimationEnd', spy);
+        expect(el.off).toHaveBeenCalledWith('animationend webkitAnimationEnd', spy);
     }));
 });

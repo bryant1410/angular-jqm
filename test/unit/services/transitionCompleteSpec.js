@@ -13,19 +13,18 @@ describe('transitionComplete', function() {
             spy = jasmine.createSpy();
         $sniffer.animations = true;
         $sniffer.vendorPrefix = '';
-        spyOn(el, 'bind');
+        spyOn(el, 'on');
         $transitionComplete(el, spy);
-        expect(el.bind).toHaveBeenCalledWith('transitionend', spy);
+        expect(el.on).toHaveBeenCalledWith('transitionend', spy);
     }));
     it('binds to prefixed transitionend if vendorPrefix exists', inject(function($transitionComplete, $sniffer) {
         var el = angular.element('<div></div>'),
             spy = jasmine.createSpy();
         $sniffer.animations = true;
         $sniffer.vendorPrefix = 'Webkit';
-        spyOn(el, 'bind');
+        spyOn(el, 'on');
         $transitionComplete(el, spy);
-        expect(el.bind).toHaveBeenCalledWith('transitionend', spy);
-        expect(el.bind).toHaveBeenCalledWith('webkitTransitionEnd', spy);
+        expect(el.on).toHaveBeenCalledWith('transitionend webkitTransitionEnd', spy);
     }));
     it('should support once binding', inject(function($transitionComplete, $sniffer) {
         var el = angular.element('<div></div>');
@@ -34,13 +33,13 @@ describe('transitionComplete', function() {
         $sniffer.animations = true;
         $sniffer.vendorPrefix = '';
 
-        spyOn(el, 'unbind').andCallThrough();
-        spyOn(el, 'bind').andCallThrough();
+        spyOn(el, 'off').andCallThrough();
+        spyOn(el, 'on').andCallThrough();
 
         $transitionComplete(el, spy, true);
-        expect(el.bind.mostRecentCall.args[0]).toBe('transitionend');
+        expect(el.on.mostRecentCall.args[0]).toMatch('transitionend');
         el.triggerHandler('transitionend');
-        expect(el.unbind.mostRecentCall.args[0]).toBe('transitionend');
+        expect(el.off.mostRecentCall.args[0]).toMatch('transitionend');
         expect(spy).toHaveBeenCalled();
 
         spy.reset();
@@ -54,13 +53,12 @@ describe('transitionComplete', function() {
         $sniffer.animations = true;
         $sniffer.vendorPrefix = 'Webkit';
 
-        spyOn(el, 'unbind').andCallThrough();
-        spyOn(el, 'bind').andCallThrough();
+        spyOn(el, 'off').andCallThrough();
+        spyOn(el, 'on').andCallThrough();
 
         var removeCb = $transitionComplete(el, spy);
-        expect(el.unbind).not.toHaveBeenCalled();
+        expect(el.off).not.toHaveBeenCalled();
         removeCb();
-        expect(el.unbind).toHaveBeenCalledWith('transitionend', spy);
-        expect(el.unbind).toHaveBeenCalledWith('webkitTransitionEnd', spy);
+        expect(el.off).toHaveBeenCalledWith('transitionend webkitTransitionEnd', spy);
     }));
 });

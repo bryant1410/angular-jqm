@@ -11,22 +11,22 @@ jqmModule.directive('jqmClass', [function() {
       });
 
       function jqmClassWatchAction(newVal) {
-        if (oldVal && !angular.equals(newVal,oldVal)) {
-          changeClass('removeClass', oldVal);
+        if (!equals(newVal, oldVal)) {
+          element.removeClass(getClassString(oldVal));
+          element.addClass(getClassString(newVal));
+          oldVal = newVal;
         }
-        changeClass('addClass', newVal);
-        oldVal = angular.copy(newVal);
       }
 
-      function changeClass(fn, classVal) {
-        if (angular.isObject(classVal) && !angular.isArray(classVal)) {
+      function getClassString(classVal) {
+        if (isObject(classVal) && !isArray(classVal)) {
           var classes = [];
-          angular.forEach(classVal, function(v, k) {
+          forEach(classVal, function(v, k) {
             if (v) { classes.push(k); }
           });
           classVal = classes;
         }
-        element[fn](angular.isArray(classVal) ? classVal.join(' ') : classVal);
+        return isArray(classVal) ? classVal.join(' ') : classVal;
       }
     }
   };

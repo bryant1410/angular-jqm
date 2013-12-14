@@ -3,11 +3,10 @@ describe('jqmPopupOverlay', function() {
     var el, scope;
     beforeEach(inject(function($compile, $rootScope) {
         scope = angular.extend($rootScope.$new(), {
-            $$scopeAs: 'jqmPopup',
-            hide: jasmine.createSpy('popup.hide'),
-            opened: false,
-            $theme: 'banana',
-            overlayTheme: ''
+          hide: jasmine.createSpy('popup.hide'),
+          opened: false,
+          $theme: 'banana',
+          overlayTheme: ''
         });
         el = $compile('<div jqm-popup-overlay></div>')(scope);
         scope.$apply();

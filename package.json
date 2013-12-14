@@ -19,7 +19,10 @@
     "grunt-inline-template": "0.0.1",
     "karma-sauce-launcher": "~0.1.5",
     "karma": "~0.10.7",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "grunt-contrib-sass": "~0.5.1",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-notify": "~0.2.16"
   },
   "engine": "node 0.8.x",
   "repository": {

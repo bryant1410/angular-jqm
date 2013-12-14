@@ -7,8 +7,8 @@
  * Creates a jQuery mobile listview.  Add jqmLiDivider, jqmLiEntry, and/or jqmLiLinks inside.
  *
  * @param {string=} inset Whether this listview should be inset or not. Default false.
- * @param {string=} shadow Whether this listview should have a shadow or not (only applies if inset). Default true.
- * @param {string=} shadow Whether this listview should have corners or not (only applies if inset). Default true.
+ * @param {string=} shadow Whether this listview should have a shadow or not (only applies if inset). Default false.
+ * @param {string=} corners Whether this listview should have corners or not (only applies if inset). Default false.
  *
  * @example
 <example module="jqm">
@@ -39,20 +39,19 @@
 </example>
  */
 jqmModule.directive('jqmListview', [function() {
-  var isdef = angular.isDefined;
   return {
     restrict: 'A',
     replace: true,
     transclude: true,
     template: '<%= inlineTemplate("templates/jqmListview.html") %>',
     scope: {
-      inset: '@'
+      inset: '@',
+      corners: '@',
+      shadow: '@'
     },
-    link: function(scope, element, attr) {
-      //We do this instead of '@' binding because "false" is actually truthy
-      //And these default to true
-      scope.shadow = isdef(attr.shadow) ? (attr.shadow==='true') : true;
-      scope.corners = isdef(attr.corners) ? (attr.corners==='true') : true;
+    link: function(scope, elm, attr) {
+      scope.useDefaultShadow = !isDefined(attr.shadow);
+      scope.useDefaultCorners = !isDefined(attr.corners);
     }
   };
 }]);

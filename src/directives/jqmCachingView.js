@@ -92,7 +92,7 @@ function (jqmViewDirectives, jqmViewCache, $injector, $q) {
 
   function JqmCachingViewCtrl($scope, $element) {
     var self = this;
-    angular.forEach(jqmViewDirectives, function (directive) {
+    forEach(jqmViewDirectives, function (directive) {
       $injector.invoke(directive.controller, self, {
         $scope: $scope,
         $element: $element

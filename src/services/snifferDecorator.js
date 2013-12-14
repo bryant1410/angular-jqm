@@ -33,8 +33,8 @@
 
 jqmModule.config(['$provide', function ($provide) {
   $provide.decorator('$sniffer', ['$delegate', '$window', '$document', function ($sniffer, $window, $document) {
-    var fakeBody = angular.element("<body>");
-    angular.element($window.document.body).prepend(fakeBody);
+    var fakeBody = jqLite("<body>");
+    jqLite($window.document.body).prepend(fakeBody);
 
     $sniffer.cssTransform3d = transform3dTest();
 
@@ -82,8 +82,8 @@ jqmModule.config(['$provide', function ($provide) {
     //https://github.com/angular-widgets/angular-jqm/issues/89
     function android2Transitions() {
       if (!$sniffer.transitions || !$sniffer.animations) {
-        $sniffer.transitions = angular.isString($document[0].body.style.webkitTransition);
-        $sniffer.animations = angular.isString($document[0].body.style.webkitAnimation);
+        $sniffer.transitions = isString($document[0].body.style.webkitTransition);
+        $sniffer.animations = isString($document[0].body.style.webkitAnimation);
         if ($sniffer.animations || $sniffer.transitions) {
           $sniffer.vendorPrefix = 'webkit';
           $sniffer.cssTransform3d = true;

@@ -28,7 +28,7 @@
 jqmModule.directive('jqmTheme', [function () {
   return {
     restrict: 'A',
-    compile: function compile() {
+    compile: function() {
       return {
         pre: function preLink(scope, iElement, iAttrs) {
           var themeScope = iElement.isolateScope() || iElement.scope();

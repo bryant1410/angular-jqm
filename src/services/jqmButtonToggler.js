@@ -8,35 +8,32 @@ jqmModule.factory('jqmButtonToggler', function() {
 
     //Exposed for testing
     self.$mousedown = function(e) {
-      var unbindEvents = e.type === 'mousedown' ?
+      var offEventNames = e.type === 'mousedown' ?
         'mouseup mousemove' :
         'touchmove touchend touchcancel';
-      var target = angular.element(e.target);
+      var target = jqLite(e.target);
       var btnElement = parentWithClass(target, 'ui-btn-up-' + target.scope().$theme);
       if (btnElement) {
         toggleBtnDown(btnElement, true);
-        target.bind(unbindEvents, onBtnUp);
+        target.on(offEventNames, onBtnUp);
       }
       function onBtnUp() {
         toggleBtnDown(btnElement, false);
-        //TODO(1.2): 1.2 fixes unbind breaking on space-seperated events, so do one unbind
-        angular.forEach(unbindEvents.split(' '), function(eventName) {
-          target.unbind(eventName, onBtnUp);
-        });
+        target.off(offEventNames, onBtnUp);
       }
     };
 
     //Exposed for testing
     self.$mouseover = function(e) {
-      var target = angular.element(e.target);
+      var target = jqLite(e.target);
       var btnElement = parentWithClass(target, 'ui-btn');
       if (btnElement && !btnElement.hasClass('ui-btn-down-' + target.scope().$theme)) {
         toggleBtnHover(btnElement, true);
-        target.bind('mouseout', onBtnMouseout);
+        target.on('mouseout', onBtnMouseout);
       }
       function onBtnMouseout() {
         toggleBtnHover(btnElement, false);
-        target.unbind('mouseout', onBtnMouseout);
+        target.off('mouseout', onBtnMouseout);
       }
     };
 

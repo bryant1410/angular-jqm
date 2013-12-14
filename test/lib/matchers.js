@@ -5,7 +5,7 @@ beforeEach(function() {
         toHaveClass: function(cls) {
             var not = this.isNot ? "not " : "";
             this.message = function() {
-                return "Expected '" + angular.mock.dump(this.actual) + "' " + not + "to have class '" + cls + "'.";
+                return "Expected '" + angular.mock.dump(this.actual) + "' " + not + "to have class '" + (angular.isArray(cls) ? cls.join(' ') : cls) + "'.";
             };
 
             var self = this;

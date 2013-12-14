@@ -61,16 +61,16 @@ jqmModule.directive('jqmPanelContainer', ['$timeout', '$transitionComplete', '$s
       return panels[position];
     };
 
-    $scope.$watch('$scopeAs.pc.openPanelName', openPanelChanged);
+    $scope.$watch('openPanelName', openPanelChanged);
     if (!$sniffer.animations) {
-      $scope.$watch('$scopeAs.pc.openPanelName', transitionComplete);
+      $scope.$watch('openPanelName', transitionComplete);
     } else {
       $transitionComplete($element, transitionComplete);
     }
 
     function openPanelChanged() {
       updatePanelContent();
-      angular.forEach(panels, function (panel) {
+      forEach(panels, function (panel) {
         var opened = panel.scope.position === $scope.openPanelName;
         if (opened) {
           panel.element.removeClass('ui-panel-closed');
@@ -92,7 +92,7 @@ jqmModule.directive('jqmPanelContainer', ['$timeout', '$transitionComplete', '$s
     //types (overlay) only animate the panel, and some (reveal) only
     //animate the content wrapper.
     function transitionComplete() {
-      angular.forEach(panels, function (panel) {
+      forEach(panels, function (panel) {
         var opened = panel.scope.position === $scope.openPanelName;
         if (opened) {
           panel.element.addClass('ui-panel-opened');

@@ -248,7 +248,7 @@ function($compile, $templateCache, $http, $q, $route, $controller, $injector, $n
       }
       if (!animationName) {
         if (route.animation) {
-          if (angular.isFunction(route.animation) || isArray(route.animation)) {
+          if (isFunction(route.animation) || isArray(route.animation)) {
             animationName = $injector.invoke(route.animation, null, {
               $scope: scope,
               $routeParams: route.params

@@ -1,6 +1,6 @@
-<ul class="ui-listview" jqm-scope-as="jqmListview"
-  jqm-class="{'ui-listview-inset': $scopeAs.jqmListview.inset,
-  'ui-corner-all': $scopeAs.jqmListview.inset && $scopeAs.jqmListview.corners, 
-  'ui-shadow': $scopeAs.jqmListview.inset && $scopeAs.jqmListview.shadow}"
+<ul class="ui-listview"
+  jqm-class="{'ui-listview-inset': inset,
+  'ui-corner-all': useDefaultCorners ? inset=='true' : corners=='true',
+  'ui-shadow': useDefaultShadow ? inset : shadow=='true'}"
   ng-transclude jqm-position-anchor>
 </ul>

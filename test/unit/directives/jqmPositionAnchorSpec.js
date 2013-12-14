@@ -22,9 +22,9 @@ describe('jqmPositionClass directive', function() {
 
     var elements, parent;
 
-    function setup(childNames) {
+    function setup(childNames, expr) {
         elements = {};
-        parent = angular.element('<div jqm-position-anchor></div>');
+        parent = angular.element('<div jqm-position-anchor="'+( expr || '' )+'"></div>');
         angular.forEach(childNames, function(name) {
             elements[name] = angular.element('<div test-scope></div>');
             parent.append(elements[name]);

@@ -18,7 +18,6 @@
  *
  */
 jqmModule.directive('jqmLiLink', [function() {
-  var isdef = angular.isDefined;
   return {
     restrict: 'A',
     transclude: true,
@@ -33,9 +32,9 @@ jqmModule.directive('jqmLiLink', [function() {
       //hasThumb and hasCount set by jqmLiCount and jqmLiThumb
     },
     compile: function(element, attr) {
-      attr.icon = isdef(attr.icon) ? attr.icon : 'ui-icon-arrow-r';
-      attr.iconpos = isdef(attr.iconpos) ? attr.iconpos : 'right';
-      attr.iconShadow = isdef(attr.iconShadow) ? attr.iconShadow : true;
+      attr.icon = isDefined(attr.icon) ? attr.icon : 'ui-icon-arrow-r';
+      attr.iconpos = isDefined(attr.iconpos) ? attr.iconpos : 'right';
+      attr.iconShadow = isDefined(attr.iconShadow) ? attr.iconShadow : true;
     }
   };
   function JqmLiController($scope) {

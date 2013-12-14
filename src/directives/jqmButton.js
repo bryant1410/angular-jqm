@@ -43,7 +43,6 @@
 </example>
  */
 jqmModule.directive('jqmButton', ['jqmClassDirective', function(jqmClassDirectives, jqmOnceClassDirectives) {
-  var isDef = angular.isDefined;
   return {
     restrict: 'A',
     transclude: true,
@@ -58,18 +57,18 @@ jqmModule.directive('jqmButton', ['jqmClassDirective', function(jqmClassDirectiv
     },
     require: '^?jqmControlGroup',
     compile: function(elm, attr) {
-      attr.shadow = isDef(attr.shadow) ? attr.shadow==='true' : 'true';
-      attr.corners = isDef(attr.corners) ? attr.corners==='true' : 'true';
+      attr.shadow = isDefined(attr.shadow) ? attr.shadow==='true' : 'true';
+      attr.corners = isDefined(attr.corners) ? attr.corners==='true' : 'true';
 
       elm[0].className += ' ui-btn';
       attr.$set('jqmClass',
-        "{'ui-first-child': $scopeAs.jqmBtn.$position.first," +
-        "'ui-submit': $scopeAs.jqmBtn.type," +
-        "'ui-last-child': $scopeAs.jqmBtn.$position.last," +
-        "'ui-shadow': $scopeAs.jqmBtn.shadow," +
-        "'ui-btn-corner-all': $scopeAs.jqmBtn.corners," +
-        "'ui-mini': $scopeAs.jqmBtn.isMini()," +
-        "'ui-btn-inline': $scopeAs.jqmBtn.isInline()}"
+        "{'ui-first-child': $position.first," +
+        "'ui-submit': type," +
+        "'ui-last-child': $position.last," +
+        "'ui-shadow': shadow," +
+        "'ui-btn-corner-all': corners," +
+        "'ui-mini': isMini()," +
+        "'ui-btn-inline': isInline()}"
       );
 
       if (elm[0].tagName.toLowerCase() === 'input') {
@@ -80,7 +79,7 @@ jqmModule.directive('jqmButton', ['jqmClassDirective', function(jqmClassDirectiv
       //Eg <div jqm-button="submit"> --> we put a <input type="submit"> inside
       var buttonEl;
       if (attr.jqmButton) {
-        buttonEl = angular.element('<button>');
+        buttonEl = jqLite('<button>');
         buttonEl.addClass('ui-btn-hidden');
         buttonEl.attr("type", attr.jqmButton);
         if (attr.name) {
@@ -102,13 +101,12 @@ jqmModule.directive('jqmButton', ['jqmClassDirective', function(jqmClassDirectiv
         elm.addClass('ui-btn-up-' + scope.$theme + ' ' +
                      (getIconPos() ? 'ui-btn-icon-'+ getIconPos() : ''));
 
-        scope.$$scopeAs = 'jqmBtn';
         scope.isMini = isMini;
         scope.getIconPos = getIconPos;
         scope.isInline = isInline;
         scope.type = attr.jqmButton;
 
-        angular.forEach(jqmClassDirectives, function(directive) {
+        forEach(jqmClassDirectives, function(directive) {
           directive.link(scope, elm, attr);
         });
 

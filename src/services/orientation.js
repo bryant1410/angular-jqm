@@ -11,7 +11,7 @@
 jqmModule.factory('$orientation', ['$window', '$rootScope', function($window, $rootScope) {
   if (!$window.addEventListener) {
     // For tests
-    return angular.noop;
+    return noop;
   }
   var lastOrientation = getOrientation(),
     VERTICAL = "vertical",

@@ -82,10 +82,10 @@ jqmModule.directive('jqmCheckbox', [function () {
         var trueValue = attr.ngTrueValue,
           falseValue = attr.ngFalseValue;
 
-        if (!angular.isString(trueValue)) {
+        if (!isString(trueValue)) {
           trueValue = true;
         }
-        if (!angular.isString(falseValue)) {
+        if (!isString(falseValue)) {
           falseValue = false;
         }
 

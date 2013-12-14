@@ -36,7 +36,7 @@ jqmModule.factory('$hideAddressBar', ['$window', '$rootElement', '$orientation',
       docHeight = MAX_SCREEN_HEIGHT;
     }
     setDocumentHeight(docHeight);
-    if (!angular.isDefined(scrollToHideAddressBar)) {
+    if (!isDefined(scrollToHideAddressBar)) {
       // iOS needs a scrollTo(0,0) and android a scrollTo(0,1).
       // We always do a scrollTo(0,1) at first and check the scroll position
       // afterwards for future scrolls.
@@ -55,7 +55,7 @@ jqmModule.factory('$hideAddressBar', ['$window', '$rootElement', '$orientation',
         cachedHeights[orientation] = getViewportHeight();
         setDocumentHeight(cachedHeights[orientation]);
       }
-      if (!angular.isDefined(scrollToHideAddressBar)) {
+      if (!isDefined(scrollToHideAddressBar)) {
         if ($window.pageYOffset === 1) {
           // iOS
           scrollToHideAddressBar = 0;

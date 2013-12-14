@@ -2,6 +2,9 @@ var path = require('path');
 var fs = require('fs');
 
 module.exports = function(grunt) {
+
+  require('load-grunt-tasks')(grunt);
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('./package.json'),
     concat: {
@@ -10,9 +13,7 @@ module.exports = function(grunt) {
           banner: grunt.file.read('build/header.js'),
           footer: grunt.file.read('build/footer.js')
         },
-        src: ['src/module.js',
-          'src/**/*.js',
-          '<%= css2js.all.dest %>'],
+        src: ['src/module.js', 'src/**/*.js'],
         dest: 'dist/<%= pkg.name %>-nodeps.js'
       },
       all: {
@@ -22,6 +23,7 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
+    
     inlineTemplate: {
       //Output files in same spot with inline templates
       options: {
@@ -34,18 +36,17 @@ module.exports = function(grunt) {
         }
       }
     },
-    cssmin: {
+
+    sass: {
       all: {
-        src: ['src/css/**/*.css'],
-        dest: '.tmp/angular-jqm.css'
+        options: {
+          style: 'compressed'
+        },
+        src: ['src/css/main.scss'],
+        dest: 'dist/angular-jqm.css'
       }
     },
-    css2js: {
-      all: {
-        src: ['.tmp/angular-jqm.css'],
-        dest: '.tmp/angular-jqm.css.js'
-      }
-    },
+
     uglify: {
       options: {
         preserveComments: 'some'
@@ -56,10 +57,24 @@ module.exports = function(grunt) {
         }
       }
     },
+
     watch: {
+      options: {
+        atBegin: true
+      },
       files: ['src/**/*','test/**/*'],
-      tasks: ['quickbuild', 'karma:dev:run']
+      tasks: ['quickbuild', 'karma:dev:run', 'notify']
     },
+
+    notify: {
+      all: {
+        options: {
+          title: "angular-jqm",
+          message: "grunt dev: Build Complete"
+        }
+      }
+    },
+
     jshint: {
       options: {
         jshintrc: __dirname + '/.jshintrc'
@@ -82,6 +97,7 @@ module.exports = function(grunt) {
         //options moved to .jshintrc
       }
     },
+
     connect: {
       server: {
         options: {
@@ -91,6 +107,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
     karma: {
       options: {
         configFile: 'test/config/karma-shared.conf.js',
@@ -120,9 +137,11 @@ module.exports = function(grunt) {
         }
       }
     },
+
     changelog: {
       dest: 'CHANGELOG.md'
     },
+
     ngdocs: {
       options: {
         dest: 'dist/docs/',
@@ -157,23 +176,11 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', ['quickbuild', 'uglify']);
-  grunt.registerTask('quickbuild', ['commit-hook', 'cssmin', 'css2js', 'concat', 'inlineTemplate']);
+  grunt.registerTask('quickbuild', ['commit-hook', 'sass', 'concat', 'inlineTemplate']);
   grunt.registerTask('dev', ['connect','karma:dev','watch']);
   grunt.registerTask('default', ['build','jshint','karma:localBuild','ngdocs']);
 
   grunt.registerTask('commit-hook', commitHook);
-
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-inline-template');
-  grunt.loadNpmTasks('grunt-ngdocs');
-  grunt.loadTasks('build/grunt');
 
   function commitHook() {
     if (!grunt.file.exists('.git/hooks/commit-msg')) {

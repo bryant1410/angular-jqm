@@ -34,9 +34,6 @@ module.exports = function(config) {
     exclude: [
     ],
 
-    // web server port
-    port: 9678,
-
     preprocessors: {
       'src/directives/*.js': ['inlineTemplate']
     },

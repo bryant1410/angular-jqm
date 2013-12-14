@@ -12,7 +12,9 @@ function registerJqmAnimation(animationName) {
     function makeAnimationFn(className) {
       return function(element, done) {
         var unbind, finished;
-        $timeout(animate, 1, false);
+        element.css('z-index', -10);
+        animate();
+        element.css('z-index', '');
         
         function animate() {
           if (!finished) {

@@ -29,9 +29,6 @@ describe('jqmAnimation', function() {
   }
 
   function expectIn(animationName) {
-    expect(elm).not.toHaveClass('in out');
-
-    $timeout.flush();
     expect(elm).toHaveClass(animationName + ' in');
 
     expect(doneSpy).not.toHaveBeenCalled();
@@ -41,9 +38,6 @@ describe('jqmAnimation', function() {
     expect(elm).not.toHaveClass('in out');
   }
   function expectOut(animationName) {
-    expect(elm).not.toHaveClass('in out');
-
-    $timeout.flush();
     expect(elm).toHaveClass(animationName + ' out');
 
     expect(doneSpy).not.toHaveBeenCalled();

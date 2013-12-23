@@ -1,7 +1,7 @@
-jqmModule.directive('input', ['$compile', '$timeout', function($compile, $timeout) {
+jqmModule.directive('jqmInputText', ['$compile', '$timeout', function($compile, $timeout) {
   var clearButtonTemplate = '<a jqm-button ng-show="showClearButton()" class="ui-input-clear ui-fullsize" iconpos="notext" icon="ui-icon-delete" ng-click="clearButtonAction()">clear text</a>';
   return {
-    restrict: 'E',
+    restrict: 'A',
     require: ['?ngModel', '^?jqmInputWrapper'],
     scope: {
       type: '@',
@@ -9,6 +9,12 @@ jqmModule.directive('input', ['$compile', '$timeout', function($compile, $timeou
       clearBtn: '&',
     },
     link: function(scope, element, attr, ctrls) {
+      var tagName = element[0].tagName.toLowerCase();
+      if (tagName != 'input') {
+        throw new Error('jqmInputText must be an <input>. Instead, is ' +
+                        ' <' + tagName + '>!');
+      }
+
       var ngModelCtrl = ctrls[0];
       var wrapperCtrl = ctrls[1];
       var hasClearButton = isDefined(attr.clearBtn);
@@ -19,17 +25,13 @@ jqmModule.directive('input', ['$compile', '$timeout', function($compile, $timeou
       if (wrapperCtrl) {
         wrapperCtrl.$scope.input = scope;
       }
+      setClasses();
 
       element.on('focus', function() { $timeout(onFocus); });
       element.on('blur', function() { $timeout(onBlur); });
 
       attr.$observe('disabled', disabledWatchAction);
       attr.$observe('class', setClasses);
-
-      scope.isSearch = isSearch;
-      scope.isText = isText;
-      scope.isCheckbox = isCheckbox;
-      scope.isRadio = isRadio;
 
       scope.showClearButton = showClearButton;
       scope.clearButtonAction = clearButtonAction;
@@ -47,10 +49,11 @@ jqmModule.directive('input', ['$compile', '$timeout', function($compile, $timeou
         scope.disabled = !!newValue;
         setClasses();
       }
-      function setClasses(value) {
-        element.toggleClass('ui-input-text ui-body-' + scope.$theme, !scope.isCheckbox());
+      function setClasses() {
+        element.toggleClass('ui-input-text ui-body-' + scope.$theme,
+                         !!(scope.type != 'checkbox' && scope.type != 'radio'));
         //If we're under a wrapper, we apply focus classes to that. else, we apply them here
-        if (!wrapperCtrl && !isCheckbox() && !isRadio()) {
+        if (!wrapperCtrl) {
           element.toggleClass('mobile-textinput-disabled ui-state-disabled', !!scope.disabled);
           element.toggleClass('ui-focus', !!scope.isFocused);
           element.addClass('ui-corner-all ui-shadow-inset');
@@ -62,12 +65,6 @@ jqmModule.directive('input', ['$compile', '$timeout', function($compile, $timeou
       }
       function isText() {
         return scope.type !== 'search' && scope.type !== 'checkbox' && scope.type !== 'radio';
-      }
-      function isCheckbox() {
-        return scope.type === 'checkbox';
-      }
-      function isRadio() {
-        return scope.type === 'radio';
       }
 
       function showClearButton() {

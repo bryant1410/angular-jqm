@@ -1,5 +1,6 @@
+"use strict";
 describe('jqmInputWrapper', function() {
-  var ngElement, jqmElement;
+  var ngElement, jqmElement, ng, jqm;
   beforeEach(function() {
     ng = testutils.ng;
     jqm = testutils.jqm;
@@ -9,10 +10,16 @@ describe('jqmInputWrapper', function() {
     testutils.compareElementRecursive(ngElement, jqmElement, /ui-input-clear-hidden/); //we use ng-show
   }
 
+  it('should erorr with non-input element', function() {
+    expect(function() {
+      ng.init('<div jqm-input-text></div>');
+    }).toThrow();
+  });
+
   describe("markup compared to jqm type='search'", function() {
     function setup(attrs, value) {
       ngElement = ng.init('<label class="ui-input-text">'+(value||'')+'</label>' +
-                          '<div jqm-input-wrapper><input type="search" '+(attrs||'')+'></div>');
+                          '<div jqm-input-wrapper><input jqm-input-text type="search" '+(attrs||'')+'></div>');
       jqmElement = jqm.init('<label for="jqminput">'+(value||'')+'</label>' +
                             '<input id="jqminput" type="search" '+(attrs||'')+'>');
 
@@ -40,7 +47,7 @@ describe('jqmInputWrapper', function() {
   describe("markup compared to jqm type='text'", function() {
     function setup(attrs, value) {
       ngElement = ng.init('<label class="ui-input-text">'+(value||'')+'</label>' +
-                          '<div jqm-input-wrapper><input '+(attrs||'')+'></div>');
+                          '<div jqm-input-wrapper><input jqm-input-text '+(attrs||'')+'></div>');
       jqmElement = jqm.init('<label for="jqminput">'+(value||'')+'</label>' +
                             '<input id="jqminput" '+(attrs||'')+'>');
 
@@ -82,21 +89,18 @@ describe('jqmInputWrapper', function() {
     it('should have ui-input-search', function() {
       setup();
       expect(el).not.toHaveClass('ui-input-search ui-btn-corner-all ui-icon-searchfield');
-      input.isSearch = function() { return true; };
+      input.type = 'search';
       scope.$apply();
       expect(el).toHaveClass('ui-input-search ui-btn-corner-all ui-icon-searchfield');
     });
-    it('should have ui-input-text', function() {
+    it('should have ui-input-text by default', function() {
       setup();
-      expect(el).not.toHaveClass('ui-input-text ui-corner-all');
-      input.isText = function() { return true; };
-      scope.$apply();
       expect(el).toHaveClass('ui-input-text ui-corner-all');
     });
     it('should have ui-checkbox', function() {
       setup();
       expect(el).not.toHaveClass('ui-checkbox');
-      input.isCheckbox = function() { return true; };
+      input.type = 'checkbox';
       scope.$apply();
       expect(el).toHaveClass('ui-checkbox');
     });
@@ -111,7 +115,7 @@ describe('jqmInputWrapper', function() {
     function setup(attr) {
       inject(function($compile, $rootScope) {
         scope = $rootScope.$new();
-        el = $compile('<div jqm-input-wrapper><input '+(attr||'')+'></div>')(scope);
+        el = $compile('<div jqm-input-wrapper><input jqm-input-text '+(attr||'')+'></div>')(scope);
         scope.$apply();
         input = el.find('input');
         inputScope = input.isolateScope();

@@ -13,7 +13,7 @@ describe('jqmFieldcontain', function() {
             testutils.compareElementRecursive(ngElement, jqmElement);
         });
         it('has same markup with label and textinput', function() {
-            ngElement = ng.init('<div jqm-fieldcontain><label for="name">Your Name:</label><div jqm-input-wrapper><input type="text" ng-model="name"></div></div>');
+            ngElement = ng.init('<div jqm-fieldcontain><label for="name">Your Name:</label><div jqm-input-wrapper><input jqm-input-text type="text" ng-model="name"></div></div>');
             jqmElement = jqm.init('<div data-role="fieldcontain"><label for="name">Your Name:</label><input type="text" name="name" /></div>');
             testutils.compareElementRecursive(ngElement, jqmElement);
         });

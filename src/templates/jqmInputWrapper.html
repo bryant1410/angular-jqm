@@ -1,8 +1,8 @@
 <div jqm-class="{'ui-disabled': input.disabled,
   'ui-mini': input.mini,
-  'ui-input-search ui-btn-corner-all ui-icon-searchfield': input.isSearch(),
-  'ui-input-text ui-corner-all': input.isText(),
-  'ui-checkbox': input.isCheckbox(),
+  'ui-input-search ui-btn-corner-all ui-icon-searchfield': isSearch(),
+  'ui-input-text ui-corner-all': isText(),
+  'ui-checkbox': isCheckbox(),
   'ui-focus': input.isFocused}"
   jqm-once-class="ui-body-{{input.$theme || $theme}}"
   class="ui-shadow-inset ui-btn-shadow" jqm-transclude>

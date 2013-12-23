@@ -1,12 +1,13 @@
 .ui-mobile .ui-page {
-  height: 100%;
-  min-height: 0;
+  height: 100%
 }
 .ui-content {
   position: relative;
   margin: 0;
   top: 0;
   bottom: 0;
+  min-height: 100%;
+  height: initial !important; /* jquery mobile css sets content height 100%, this is bad */
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);

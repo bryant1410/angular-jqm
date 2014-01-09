@@ -1,0 +1,15 @@
+<div jqm-scope-as="jqmSlider" class="ui-slider" jqm-class="{'ui-disabled': $scopeAs.jqmSlider.disabled}">
+    <input type="number" data-ng-model="$scopeAs.jqmSlider.sliderValue" data-type="range" class="ui-input-text ui-corner-all ui-shadow-inset ui-slider-input"
+        min="$scopeAs.jqmSlider.min" max="$scopeAs.jqmSlider.max" ng-change="$scopeAs.jqmSlider.inputChange()" 
+        jqm-class="{'ui-disabled': disabled, 'ui-state-disabled': disabled, 'mobile-textinput-disabled': disabled,'mobile-slider-disabled': disabled}"
+        jqm-once-class="ui-body-{{$theme}}" />
+    <div jqm-class="{'ui-mini':$scopeAs.jqmSlider.isMini(),'ui-disabled': disabled}" class="ui-slider-track ui-btn-down-c ui-btn-corner-all">
+        <a href="#" class="ui-slider-handle ui-btn ui-shadow ui-btn-corner-all" data-role="slider" aria-valuenow="$scopeAs.jqmSlider.sliderValue"
+           jqm-once-class="ui-btn-up-{{$theme}}" 
+           aria-valuemax="$scopeAs.jqmSlider.max" aria-valuemin="$scopeAs.jqmSlider.min" aria-valuetext="0" style="left:50%;" jqm-slider-handle ng-transclude>
+            <span class="ui-btn-inner">
+                <span class="ui-btn-text"></span>
+            </span>
+        </a>
+    </div>
+</div>

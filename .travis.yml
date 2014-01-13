@@ -17,8 +17,8 @@ before_script:
 script:
 - bower install
 - grunt
-- grunt karma:sauce1
-- grunt karma:sauce2
+#- grunt karma:sauce1
+#- grunt karma:sauce2
 
 after_success: ./build/update-gh-pages.sh
 

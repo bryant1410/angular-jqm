@@ -76,6 +76,7 @@ Your main html file should look like this:
     <html ng-app="app">
     <head>
         <link type="text/css" rel="stylesheet" href="jquery.mobile-1.3.1.css">
+        <link type="text/css" rel="stylesheet" href="angular-jqm.css">
         <script src="angular.js"></script>
         <script src="angular-touch.js"></script>
         <script src="angular-animate.js"></script>

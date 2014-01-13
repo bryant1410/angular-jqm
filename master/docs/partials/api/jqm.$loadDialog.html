@@ -1,62 +1,55 @@
 <h1><code ng:non-bindable="">$loadDialog</code>
-<span class="hint">(service in module <code ng:non-bindable="">jqm</code>
-)</span>
+<div><span class="hint">service in module <code ng:non-bindable="">jqm</code>
+</span>
+</div>
 </h1>
-<div><h2 id="Description">Description</h2>
-<div class="description"><p>Shows a wait dialog to indicate some long running work.</p></div>
-<h2 id="Dependencies">Dependencies</h2>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="jqm-loaddialog-page"><p>Shows a wait dialog to indicate some long running work.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
 <ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$rootElement">$rootElement</a></code>
 </li>
 <li><code ng:non-bindable=""><a href="#/api/ng.$rootScope">$rootScope</a></code>
 </li>
 </ul>
-<h2 id="Usage">Usage</h2>
+<h2 id="usage">Usage</h2>
 <div class="usage"><pre class="prettyprint linenums">$loadDialog();</pre>
 </div>
-<div class="member method"><h2 id="Methods">Methods</h2>
-<ul class="methods"><li><h3 id="hide">hide()</h3>
-<div class=""><p>Restores the dialog state before the show function was called.</p></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_hide">hide()</h3>
+<div class=""><div class="jqm-loaddialog-hide-page"><p>Restores the dialog state before the show function was called.</p>
+</div></div>
 </li>
-<li><h3 id="show">show(message, callback)</h3>
-<div class="show"><p>Opens the wait dialog and shows the given message (if existing).
+<li><h3 id="methods_show">show(message, callback)</h3>
+<div class="show"><div class="jqm-loaddialog-show-page"><p>Opens the wait dialog and shows the given message (if existing).
 If the user clicks on the wait dialog the given callback is called.
 This can be called even if the dialog is currently showing. It will
 then change the message and revert back to the last message when
-the hide function is called.</p><h4 id="Parameters">Parameters</h4>
-<ul class="parameters"><li><code ng:non-bindable="">message<i>(optional)</i> – {string=} – </code>
-<p>The message to be shown when the wait dialog is displayed.</p></li>
-<li><code ng:non-bindable="">callback<i>(optional)</i> – {function=} – </code>
-<p>The Callback that is executed when the wait dialog is clicked.</p></li>
-</ul>
-</div>
+the hide function is called.</p>
+</div><h5 id="methods_show_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>message <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="jqm-loaddialog-show-page"><p>The message to be shown when the wait dialog is displayed.</p>
+</div></td></tr><tr><td>callback <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">function</a></td><td><div class="jqm-loaddialog-show-page"><p>The Callback that is executed when the wait dialog is clicked.</p>
+</div></td></tr></tbody></table></div>
 </li>
-<li><h3 id="waitFor">waitFor(promise, message)</h3>
-<div class="waitfor"><p>Shows the dialog as long as the given promise runs. Shows the given message
-if defined.</p><h4 id="Parameters">Parameters</h4>
-<ul class="parameters"><li><code ng:non-bindable="">promise – {Promise} – </code>
-<p>The Promise.</p></li>
-<li><code ng:non-bindable="">message<i>(optional)</i> – {string=} – </code>
-<p>The message to be show.</p></li>
-</ul>
-</div>
+<li><h3 id="methods_waitfor">waitFor(promise, message)</h3>
+<div class="waitfor"><div class="jqm-loaddialog-waitfor-page"><p>Shows the dialog as long as the given promise runs. Shows the given message
+if defined.</p>
+</div><h5 id="methods_waitfor_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>promise</td><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="jqm-loaddialog-waitfor-page"><p>The Promise.</p>
+</div></td></tr><tr><td>message <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="jqm-loaddialog-waitfor-page"><p>The message to be show.</p>
+</div></td></tr></tbody></table></div>
 </li>
-<li><h3 id="waitForWithCancel">waitForWithCancel(The, cancelData, message)</h3>
-<div class="waitforwithcancel"><p>Same as jqm.$loadDialog#waitFor, but rejects the promise with the given
-cancelData when the user clicks on the wait dialog.</p><h4 id="Parameters">Parameters</h4>
-<ul class="parameters"><li><code ng:non-bindable="">The – {Deferred} – </code>
-<p>deferred object to cancel the promise.</p></li>
-<li><code ng:non-bindable="">cancelData – {*} – </code>
-<p>To reject the promise with.</p></li>
-<li><code ng:non-bindable="">message<i>(optional)</i> – {string=} – </code>
-<p>The message to be show.</p></li>
-</ul>
-</div>
+<li><h3 id="methods_waitforwithcancel">waitForWithCancel(The, cancelData, message)</h3>
+<div class="waitforwithcancel"><div class="jqm-loaddialog-waitforwithcancel-page"><p>Same as jqm.$loadDialog#waitFor, but rejects the promise with the given
+cancelData when the user clicks on the wait dialog.</p>
+</div><h5 id="methods_waitforwithcancel_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>The</td><td><a href="" class="label type-hint type-hint-deferred">Deferred</a></td><td><div class="jqm-loaddialog-waitforwithcancel-page"><p>deferred object to cancel the promise.</p>
+</div></td></tr><tr><td>cancelData</td><td><a href="" class="label type-hint type-hint-object">*</a></td><td><div class="jqm-loaddialog-waitforwithcancel-page"><p>To reject the promise with.</p>
+</div></td></tr><tr><td>message <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="jqm-loaddialog-waitforwithcancel-page"><p>The message to be show.</p>
+</div></td></tr></tbody></table></div>
 </li>
 </ul>
 </div>
-<h2 id="Example">Example</h2>
-<div class="example"><h4>Source</h4>
-<div source-edit="jqm" source-edit-deps="angular.js script.js" source-edit-html="index.html-16" source-edit-css="" source-edit-js="script.js-17" source-edit-unit="" source-edit-scenario=""></div>
+<h2 id="example">Example</h2>
+<div class="example"><div class="jqm-loaddialog-page"><h4 id="example_source">Source</h4>
+<div source-edit="jqm" source-edit-deps="angular.js script.js" source-edit-html="index.html-16" source-edit-css="" source-edit-js="script.js-17" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
 <pre class="prettyprint linenums" ng-set-text="index.html-16" ng-html-wrap-loaded="jqm angular.js script.js"></pre>
 <script type="text/ng-template" id="index.html-16">
@@ -85,6 +78,7 @@ function DemoCtrl($scope, $loadDialog, $timeout, $q) {
 }
 </script>
 </div>
-</div><h4>Demo</h4>
-<div class="well doc-example-live animator-container" ng-embed-app="jqm" ng-set-html="index.html-16" ng-eval-javascript="script.js-17"></div></div>
+</div><h4 id="example_demo">Demo</h4>
+<div class="well doc-example-live animate-container" ng-embed-app="jqm" ng-set-html="index.html-16" ng-eval-javascript="script.js-17"></div>
+</div></div>
 </div>

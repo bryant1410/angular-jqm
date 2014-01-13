@@ -1,6 +1,6 @@
-/*! angular-jqm - v0.0.1-SNAPSHOT - 2013-10-17
+/*! angular-jqm - v0.0.1-SNAPSHOT - 2014-01-13
  * https://github.com/angular-widgets/angular-jqm
- * Copyright (c) 2013 OPITZ CONSULTING GmbH; Licensed MIT */
+ * Copyright (c) 2014 OPITZ CONSULTING GmbH; Licensed MIT */
 (function(window, angular) {
     "use strict";
 /**
@@ -3624,9 +3624,9 @@ angular.module("templates/jqmTextinput.html", []).run(["$templateCache", functio
     "");
 }]);
 
-angular.element(window.document).find('head').append('<style type="text/css">*{-webkit-backface-visibility:hidden}html,body{-webkit-user-select:none;-moz-user-select:none;user-select:none}.ui-mobile,.ui-mobile html,.ui-mobile body{height:100%;margin:0}.ui-footer{position:absolute;bottom:0;width:100%;z-index:1}.ui-header{position:absolute;top:0;width:100%;z-index:1}.ui-mobile .ui-page{height:100%;min-height:0;overflow:hidden}.ui-content{position:relative;margin:0;padding:0}.ui-content.jqm-content-with-header{top:42px}.ui-content.jqm-content-with-footer{bottom:43px}.jqm-standalone-page{display:block;position:relative}.ui-panel{position:absolute}.ui-panel-closed{display:none}.ui-panel-content-wrap{height:100%}.jqm-panel-container{position:relative;width:100%;height:100%}.ui-panel-dismiss-open{-webkit-transition:-webkit-transform 350ms ease;-moz-transition:-moz-transform 350ms ease;transition:transform 350ms ease;-webkit-transform:translateX(0em);-moz-transform:translateX(0em);transform:translateX(0em);display:block}.jqm-panel-container-open .ui-panel-dismiss-open.ui-panel-dismiss-left{-webkit-transform:translateX(17em);-moz-transform:translateX(17em);transform:translateX(17em)}.jqm-panel-container-open .ui-panel-dismiss-open.ui-panel-dismiss-right{-webkit-transform:translateX(-17em);-moz-transform:translateX(-17em);transform:translateX(-17em)}.ui-mobile-viewport{position:relative;height:100%}</style>');})(window, angular);
+angular.element(window.document).find('head').append('<style type="text/css">*{-webkit-backface-visibility:hidden}html,body{-webkit-user-select:none;-moz-user-select:none;user-select:none}.ui-mobile,.ui-mobile html,.ui-mobile body{height:100%;margin:0}.ui-footer{position:absolute;bottom:0;width:100%;z-index:1}.ui-header{position:absolute;top:0;width:100%;z-index:1}.ui-mobile .ui-page{height:100%;min-height:0}.ui-content{position:relative;margin:0;padding:0}.ui-content.jqm-content-with-header{top:42px}.ui-content.jqm-content-with-footer{bottom:43px}.jqm-standalone-page{display:block;position:relative}.ui-panel{position:absolute}.ui-panel-closed{display:none}.ui-panel-content-wrap{height:100%}.jqm-panel-container{position:relative;width:100%;height:100%}.ui-panel-dismiss-open{-webkit-transition:-webkit-transform 350ms ease;-moz-transition:-moz-transform 350ms ease;transition:transform 350ms ease;-webkit-transform:translateX(0em);-moz-transform:translateX(0em);transform:translateX(0em);display:block}.jqm-panel-container-open .ui-panel-dismiss-open.ui-panel-dismiss-left{-webkit-transform:translateX(17em);-moz-transform:translateX(17em);transform:translateX(17em)}.jqm-panel-container-open .ui-panel-dismiss-open.ui-panel-dismiss-right{-webkit-transform:translateX(-17em);-moz-transform:translateX(-17em);transform:translateX(-17em)}.ui-mobile-viewport{position:relative;height:100%}</style>');})(window, angular);
 /*
- * angular-scrolly - v0.0.7 - 2013-10-15
+ * angular-scrolly - v0.0.8 - 2013-10-22
  * http://github.com/ajoslin/angular-scrolly
  * Created by Andy Joslin; Licensed under Public Domain
  */
@@ -3721,7 +3721,7 @@ angular.module('ajoslin.scrolly.desktop', [])
     return _mouseWheelDistanceMulti;
   };
 
-  this.$get = function($document) {
+  this.$get = ['$document', function($document) {
 
     $desktopScroller.mouseWheelDistanceMulti = _mouseWheelDistanceMulti;
     $desktopScroller.easeTimeMulti = 0.66;
@@ -3795,7 +3795,7 @@ angular.module('ajoslin.scrolly.desktop', [])
     }
 
     return $desktopScroller;
-  };
+  }];
 }]);
 
 
@@ -4768,9 +4768,10 @@ angular.module('ui.bootstrap.position', [])
           offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
         }
 
+        var boundingClientRect = element[0].getBoundingClientRect();
         return {
-          width: element.prop('offsetWidth'),
-          height: element.prop('offsetHeight'),
+          width: boundingClientRect.width || element.prop('offsetWidth'),
+          height: boundingClientRect.height || element.prop('offsetHeight'),
           top: elBCR.top - offsetParentBCR.top,
           left: elBCR.left - offsetParentBCR.left
         };
@@ -4783,8 +4784,8 @@ angular.module('ui.bootstrap.position', [])
       offset: function (element) {
         var boundingClientRect = element[0].getBoundingClientRect();
         return {
-          width: element.prop('offsetWidth'),
-          height: element.prop('offsetHeight'),
+          width: boundingClientRect.width || element.prop('offsetWidth'),
+          height: boundingClientRect.height || element.prop('offsetHeight'),
           top: boundingClientRect.top + ($window.pageYOffset || $document[0].body.scrollTop || $document[0].documentElement.scrollTop),
           left: boundingClientRect.left + ($window.pageXOffset || $document[0].body.scrollLeft  || $document[0].documentElement.scrollLeft)
         };

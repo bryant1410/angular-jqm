@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/angular-widgets/angular-jqm.png)](https://travis-ci.org/angular-widgets/angular-jqm)
-#Angular-JQM
+# Angular-JQM
 
 **Update Feb 2014: This project is currently not under development.  If you wish to take it up and finish it (angular-1.2 branch is nearly ready), please email andytjoslin@gmail.com**
 
@@ -8,11 +8,11 @@ This project has not been released yet. It is still in alpha stage, but it is us
 * Docs: http://angular-widgets.github.io/angular-jqm/master/docs
 * Extensive Demo: Coming soon
 
-##Description
+## Description
 Native AngularJS directives for jQuery Mobile. Small footprint, no 3rd party JS dependencies (jQuery, jQuery Mobile JS) required!
 
 
-##Why
+## Why
 
 - Download size: If you want to use the JavaScript part of jqm, you also need to use jquery.
   In total you need angular, jquery, jqm and the adapter. A lot of stuff...
